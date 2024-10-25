@@ -311,6 +311,11 @@ namespace eos {
 			if (b) save_signed_char('T');
 		}
 
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshift-count-overflow"
+#endif
+
 		/**
 		 * \brief Save integer types.
 		 *
@@ -346,6 +351,10 @@ namespace eos {
 			// zero optimization
 			else save_signed_char(0);
 		}
+
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic pop
+#endif
 
 		/**
 		 * \brief Save floating point types.
